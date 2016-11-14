@@ -1,0 +1,7 @@
+#Mon Nov 14 01:07:22 CET 2016
+base.0=C\:\\Users\\tib_r\\StudioProjects\\cul-de-chouette\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run-bootstrap_ea0e1914ce56325253ad78bf4241784bb7e76557
+renamed.1=classes.dex
+renamed.0=classes2.dex
+file.1=C\:\\Users\\tib_r\\StudioProjects\\cul-de-chouette\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run_548ce7f909481c82610a5735a4240fd8453f6a17\\classes.dex
+base.1=C\:\\Users\\tib_r\\StudioProjects\\cul-de-chouette\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run_548ce7f909481c82610a5735a4240fd8453f6a17
+file.0=C\:\\Users\\tib_r\\StudioProjects\\cul-de-chouette\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run-bootstrap_ea0e1914ce56325253ad78bf4241784bb7e76557\\classes.dex
