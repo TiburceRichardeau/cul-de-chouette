@@ -12,6 +12,7 @@ import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.text.InputType;
+import android.text.method.CharacterPickerDialog;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -252,6 +253,7 @@ public class CDCGame extends ListActivity {
 			Button btn = (Button) findViewById(R.id.randomDiceBtn);
 			btn.setClickable(true);
 			btn.setEnabled(true);
+			EnableRb();
     	}
     }
 
@@ -1107,7 +1109,9 @@ public class CDCGame extends ListActivity {
 
 	private int nb1between6(){
 		Random r = new Random();
-		int nb = r.nextInt(7) + 1; // Génére un nombre entre 1 et 6
+		int min = 1;
+		int max = 6;
+		int nb = r.nextInt((max - min) + 1) + min; // Génére un nombre entre 1 et 6
 		return nb;
 	}
 
@@ -1117,8 +1121,9 @@ public class CDCGame extends ListActivity {
 	public void RandomDice(View v) {
 		Button btn = (Button) findViewById(R.id.randomDiceBtn);
 		if (usedDice==false) {
-			usedDice = true;
-			btn.setText("Lancer le dernier dé");
+
+			RadioGroup rg3 = (RadioGroup) findViewById(R.id.dice3group);
+			rg3.clearCheck();
 			int nb = nb1between6();
 
 			switch (nb) {
@@ -1146,7 +1151,12 @@ public class CDCGame extends ListActivity {
 					RadioButton rb6 = (RadioButton) findViewById(R.id.rb1_6);
 					rb6.setChecked(true);
 					break;
+				default:
+					break;
 			}
+
+			usedDice = true;
+			btn.setText("Lancer le dernier dé");
 
 			nb = nb1between6();
 
@@ -1175,7 +1185,10 @@ public class CDCGame extends ListActivity {
 					RadioButton rb6 = (RadioButton) findViewById(R.id.rb2_6);
 					rb6.setChecked(true);
 					break;
+				default:
+					break;
 			}
+			DisableRb();
 		}else {
 				int nb = nb1between6();
 
@@ -1204,10 +1217,106 @@ public class CDCGame extends ListActivity {
 						RadioButton rb6 = (RadioButton) findViewById(R.id.rb3_6);
 						rb6.setChecked(true);
 						break;
-			}
+					default:
+						break;
+				}
 			btn.setText("Lancer les 2 premiers dés");
 			btn.setClickable(false);
 			btn.setEnabled(false);
+			}
 		}
+
+	/*
+	* Cette fonction permet de désactiver les radiobutton des dés dana le cas ou les dés virtuels sont utilisés
+	* */
+	private void DisableRb(){
+		RadioButton rb = (RadioButton) findViewById(R.id.rb1_1);
+		rb.setEnabled(false);
+		rb = (RadioButton) findViewById(R.id.rb1_2);
+		rb.setEnabled(false);
+		rb = (RadioButton) findViewById(R.id.rb1_3);
+		rb.setEnabled(false);
+		rb = (RadioButton) findViewById(R.id.rb1_4);
+		rb.setEnabled(false);
+		rb = (RadioButton) findViewById(R.id.rb1_5);
+		rb.setEnabled(false);
+		rb = (RadioButton) findViewById(R.id.rb1_6);
+		rb.setEnabled(false);
+
+		rb = (RadioButton) findViewById(R.id.rb2_1);
+		rb.setEnabled(false);
+		rb = (RadioButton) findViewById(R.id.rb2_2);
+		rb.setEnabled(false);
+		rb = (RadioButton) findViewById(R.id.rb2_3);
+		rb.setEnabled(false);
+		rb = (RadioButton) findViewById(R.id.rb2_4);
+		rb.setEnabled(false);
+		rb = (RadioButton) findViewById(R.id.rb2_5);
+		rb.setEnabled(false);
+		rb = (RadioButton) findViewById(R.id.rb2_6);
+		rb.setEnabled(false);
+
+		rb = (RadioButton) findViewById(R.id.rb3_1);
+		rb.setEnabled(false);
+		rb = (RadioButton) findViewById(R.id.rb3_2);
+		rb.setEnabled(false);
+		rb = (RadioButton) findViewById(R.id.rb3_3);
+		rb.setEnabled(false);
+		rb = (RadioButton) findViewById(R.id.rb3_4);
+		rb.setEnabled(false);
+		rb = (RadioButton) findViewById(R.id.rb3_5);
+		rb.setEnabled(false);
+		rb = (RadioButton) findViewById(R.id.rb3_6);
+		rb.setEnabled(false);
+	}
+
+	/*
+	* Cette fonction permet de désactiver les radiobutton des dés dana le cas ou les dés virtuels sont utilisés
+	* */
+	private void EnableRb(){
+		RadioButton rb = (RadioButton) findViewById(R.id.rb1_1);
+		rb.setEnabled(true);
+		rb = (RadioButton) findViewById(R.id.rb1_2);
+		rb.setEnabled(true);
+		rb = (RadioButton) findViewById(R.id.rb1_3);
+		rb.setEnabled(true);
+		rb = (RadioButton) findViewById(R.id.rb1_4);
+		rb.setEnabled(true);
+		rb = (RadioButton) findViewById(R.id.rb1_5);
+		rb.setEnabled(true);
+		rb = (RadioButton) findViewById(R.id.rb1_6);
+		rb.setEnabled(true);
+
+		rb = (RadioButton) findViewById(R.id.rb2_1);
+		rb.setEnabled(true);
+		rb = (RadioButton) findViewById(R.id.rb2_2);
+		rb.setEnabled(true);
+		rb = (RadioButton) findViewById(R.id.rb2_3);
+		rb.setEnabled(true);
+		rb = (RadioButton) findViewById(R.id.rb2_4);
+		rb.setEnabled(true);
+		rb = (RadioButton) findViewById(R.id.rb2_5);
+		rb.setEnabled(true);
+		rb = (RadioButton) findViewById(R.id.rb2_6);
+		rb.setEnabled(true);
+
+		rb = (RadioButton) findViewById(R.id.rb3_1);
+		rb.setEnabled(true);
+		rb = (RadioButton) findViewById(R.id.rb3_2);
+		rb.setEnabled(true);
+		rb = (RadioButton) findViewById(R.id.rb3_3);
+		rb.setEnabled(true);
+		rb = (RadioButton) findViewById(R.id.rb3_4);
+		rb.setEnabled(true);
+		rb = (RadioButton) findViewById(R.id.rb3_5);
+		rb.setEnabled(true);
+		rb = (RadioButton) findViewById(R.id.rb3_6);
+		rb.setEnabled(true);
+	}
+
+	public void disableVirtualDice(View v){
+		Button bt = (Button) findViewById(R.id.randomDiceBtn);
+		bt.setEnabled(false);
+		bt.setClickable(false);
 	}
 }

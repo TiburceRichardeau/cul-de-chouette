@@ -65,7 +65,8 @@
                 android1:gravity="center_vertical|center_horizontal">
 
                 <RadioButton
-                    android1:layout_width="40dp"
+					android:onClick="disableVirtualDice"
+					android1:layout_width="40dp"
                     android1:layout_height="40dp"
                     android1:button="@drawable/sel_dice1"
                     android1:text="1"
@@ -73,6 +74,7 @@
 					android:id="@+id/rb1_1"/>
 
                 <RadioButton
+					android:onClick="disableVirtualDice"
                     android1:button="@drawable/sel_dice2"
                     android:text="2"
                     android1:layout_width="40dp"
@@ -81,31 +83,35 @@
 					android:id="@+id/rb1_2" />
 
                 <RadioButton
-                    android1:button="@drawable/sel_dice3"
+						android:onClick="disableVirtualDice"
+						android1:button="@drawable/sel_dice3"
                     android:text="3"
                     android1:layout_width="40dp"
                     android1:layout_height="40dp"
                     android1:textColor="@android:color/transparent"
 					android:id="@+id/rb1_3"/>
 
-                <RadioButton 
-                    android1:button="@drawable/sel_dice4"
+                <RadioButton
+						android:onClick="disableVirtualDice"
+						android1:button="@drawable/sel_dice4"
                     android:text="4"
                     android1:layout_width="40dp"
                     android1:layout_height="40dp"
                     android1:textColor="@android:color/transparent"
 					android:id="@+id/rb1_4" />
                 
-                <RadioButton 
-                    android1:button="@drawable/sel_dice5"
+                <RadioButton
+						android:onClick="disableVirtualDice"
+						android1:button="@drawable/sel_dice5"
                     android:text="5"
                     android1:layout_width="40dp"
                     android1:layout_height="40dp"
                     android1:textColor="@android:color/transparent"
 					android:id="@+id/rb1_5"/>
                 
-                <RadioButton 
-                    android1:button="@drawable/sel_dice6"
+                <RadioButton
+						android:onClick="disableVirtualDice"
+						android1:button="@drawable/sel_dice6"
                     android:text="6"
                     android1:layout_width="40dp"
                     android1:layout_height="40dp"
@@ -144,6 +150,7 @@
                 android1:gravity="center_vertical|center_horizontal">
 
                 <RadioButton
+						android:onClick="disableVirtualDice"
                     android1:layout_width="40dp"
                     android1:layout_height="40dp"
                     android1:button="@drawable/sel_dice1"
@@ -152,6 +159,7 @@
 					android:id="@+id/rb2_1"/>
 
                 <RadioButton
+						android:onClick="disableVirtualDice"
                     android1:button="@drawable/sel_dice2"
                     android:text="2"
                     android1:layout_width="40dp"
@@ -160,6 +168,7 @@
 					android:id="@+id/rb2_2"/>
 
                 <RadioButton
+						android:onClick="disableVirtualDice"
                     android1:button="@drawable/sel_dice3"
                     android:text="3"
                     android1:layout_width="40dp"
@@ -167,7 +176,8 @@
                     android1:textColor="@android:color/transparent"
 					android:id="@+id/rb2_3"/>
 
-                <RadioButton 
+                <RadioButton
+						android:onClick="disableVirtualDice"
                     android1:button="@drawable/sel_dice4"
                     android:text="4"
                     android1:layout_width="40dp"
@@ -175,7 +185,8 @@
                     android1:textColor="@android:color/transparent"
 					android:id="@+id/rb2_4"/>
                 
-                <RadioButton 
+                <RadioButton
+						android:onClick="disableVirtualDice"
                     android1:button="@drawable/sel_dice5"
                     android:text="5"
                     android1:layout_width="40dp"
@@ -183,7 +194,8 @@
                     android1:textColor="@android:color/transparent"
 					android:id="@+id/rb2_5"/>
                 
-                <RadioButton 
+                <RadioButton
+						android:onClick="disableVirtualDice"
                     android1:button="@drawable/sel_dice6"
                     android:text="6"
                     android1:layout_width="40dp"
@@ -222,6 +234,7 @@
                 android1:gravity="center_vertical|center_horizontal" >
 
                 <RadioButton
+						android:onClick="disableVirtualDice"
                     android1:layout_width="40dp"
                     android1:layout_height="40dp"
                     android1:button="@drawable/sel_dice1"
@@ -230,6 +243,7 @@
 					android:id="@+id/rb3_1"/>
 
                 <RadioButton
+						android:onClick="disableVirtualDice"
                     android1:button="@drawable/sel_dice2"
                     android:text="2"
                     android1:layout_width="40dp"
@@ -238,6 +252,7 @@
 					android:id="@+id/rb3_2"/>
 
                 <RadioButton
+						android:onClick="disableVirtualDice"
                     android1:button="@drawable/sel_dice3"
                     android:text="3"
                     android1:layout_width="40dp"
@@ -245,7 +260,8 @@
                     android1:textColor="@android:color/transparent"
 					android:id="@+id/rb3_3"/>
 
-                <RadioButton 
+                <RadioButton
+						android:onClick="disableVirtualDice"
                     android1:button="@drawable/sel_dice4"
                     android:text="4"
                     android1:layout_width="40dp"
@@ -253,7 +269,8 @@
                     android1:textColor="@android:color/transparent"
 					android:id="@+id/rb3_4"/>
                 
-                <RadioButton 
+                <RadioButton
+						android:onClick="disableVirtualDice"
                     android1:button="@drawable/sel_dice5"
                     android:text="5"
                     android1:layout_width="40dp"
@@ -261,7 +278,8 @@
                     android1:textColor="@android:color/transparent"
 					android:id="@+id/rb3_5"/>
                 
-                <RadioButton 
+                <RadioButton
+						android:onClick="disableVirtualDice"
                     android1:button="@drawable/sel_dice6"
                     android:text="6"
                     android1:layout_width="40dp"
