@@ -113,12 +113,6 @@
 					android:id="@+id/rb1_6" />
                 
             </RadioGroup>
-			<ImageButton
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:id="@+id/imageButton"
-					android:src="@drawable/dice"
-					android:onClick="RandomDice1"/>
 
 		</LinearLayout>
 
@@ -198,12 +192,6 @@
 					android:id="@+id/rb2_6"/>
 
             </RadioGroup>
-			<ImageButton
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:id="@+id/imageButton2"
-					android:src="@drawable/dice"
-					android:onClick="RandomDice2"/>
 		</LinearLayout>
     
         <LinearLayout
@@ -282,12 +270,6 @@
 					android:id="@+id/rb3_6"/>
 
             </RadioGroup>
-			<ImageButton
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:id="@+id/imageButton3"
-					android:src="@drawable/dice"
-					android:onClick="RandomDice3"/>
 		</LinearLayout>
     
     	</RelativeLayout>
@@ -336,14 +318,14 @@
 	            android1:textSize="18sp" />
 	        
 	        <Button
-	            android1:id="@+id/grelottineBtn"
+	            android1:id="@+id/randomDiceBtn"
 	            android1:layout_width="fill_parent"
 	            android1:layout_height="fill_parent"
 	            android1:layout_margin="2dp"
 	            android1:layout_weight=".33"
 	            android1:background="@drawable/sel_short_button"
-	            android1:onClick="grelottineBtnAction"
-	            android1:text="@string/PlayGrelottine"
+	            android1:onClick="RandomDice"
+	            android1:text="Lancer les 2 premiers dés"
 	            android1:textColor="#ffffff"
 	            android1:textSize="20sp" />
         
