@@ -131,8 +131,8 @@ public class CDCGame extends ListActivity {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
         	ActionBar actionBar = getActionBar();
         	actionBar.setDisplayHomeAsUpEnabled(true);
-        	//actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbar_bg));
-			actionBar.setBackgroundDrawable(getDrawable(R.drawable.actionbar_bg));
+        	actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbar_bg));
+			//actionBar.setBackgroundDrawable(getDrawable(R.drawable.actionbar_bg));
         	actionBar.setTitle("");
         }
         
@@ -1105,4 +1105,110 @@ public class CDCGame extends ListActivity {
     	bt.setTextColor(Color.LTGRAY);
         bt.setEnabled(false);
     }
+
+    /*
+    	Permet de générer un nombre aléatoire pour simuler un lancé de dé pour le premier dé
+     */
+	public void RandomDice1(View v) {
+		Random r = new Random();
+		int nb = r.nextInt(7) + 1; // Génére un nombre entre 1 et 6
+
+		switch (nb) {
+			case 1:
+				RadioButton rb1 = (RadioButton) findViewById(R.id.rb1_1);
+				rb1.setChecked(true);
+				break;
+			case 2:
+				RadioButton rb2 = (RadioButton) findViewById(R.id.rb1_2);
+				rb2.setChecked(true);
+				break;
+			case 3:
+				RadioButton rb3 = (RadioButton) findViewById(R.id.rb1_3);
+				rb3.setChecked(true);
+				break;
+			case 4:
+				RadioButton rb4 = (RadioButton) findViewById(R.id.rb1_4);
+				rb4.setChecked(true);
+				break;
+			case 5:
+				RadioButton rb5 = (RadioButton) findViewById(R.id.rb1_5);
+				rb5.setChecked(true);
+				break;
+			case 6:
+				RadioButton rb6 = (RadioButton) findViewById(R.id.rb1_6);
+				rb6.setChecked(true);
+				break;
+		}
+	}
+
+		/*
+    	Permet de générer un nombre aléatoire pour simuler un lancé de dé pour le deuxieme dé
+     */
+	public void RandomDice2(View v) {
+		Random r = new Random();
+		int nb  = r.nextInt(7)+1; // Génére un nombre entre 1 et 6
+
+		switch (nb){
+			case 1:
+				RadioButton rb1 = (RadioButton) findViewById(R.id.rb2_1);
+				rb1.setChecked(true);
+				break;
+			case 2:
+				RadioButton rb2 = (RadioButton) findViewById(R.id.rb2_2);
+				rb2.setChecked(true);
+				break;
+			case 3:
+				RadioButton rb3 = (RadioButton) findViewById(R.id.rb2_3);
+				rb3.setChecked(true);
+				break;
+			case 4:
+				RadioButton rb4 = (RadioButton) findViewById(R.id.rb2_4);
+				rb4.setChecked(true);
+				break;
+			case 5:
+				RadioButton rb5 = (RadioButton) findViewById(R.id.rb2_5);
+				rb5.setChecked(true);
+				break;
+			case 6:
+				RadioButton rb6 = (RadioButton) findViewById(R.id.rb2_6);
+				rb6.setChecked(true);
+				break;
+		}
+
+	}
+
+	/*
+    	Permet de générer un nombre aléatoire pour simuler un lancé de dé pour le troisième dé
+     */
+	public void RandomDice3(View v) {
+		Random r = new Random();
+		int nb = r.nextInt(7) + 1; // Génére un nombre entre 1 et 6
+
+		switch (nb) {
+			case 1:
+				RadioButton rb1 = (RadioButton) findViewById(R.id.rb3_1);
+				rb1.setChecked(true);
+				break;
+			case 2:
+				RadioButton rb2 = (RadioButton) findViewById(R.id.rb3_2);
+				rb2.setChecked(true);
+				break;
+			case 3:
+				RadioButton rb3 = (RadioButton) findViewById(R.id.rb3_3);
+				rb3.setChecked(true);
+				break;
+			case 4:
+				RadioButton rb4 = (RadioButton) findViewById(R.id.rb3_4);
+				rb4.setChecked(true);
+				break;
+			case 5:
+				RadioButton rb5 = (RadioButton) findViewById(R.id.rb3_5);
+				rb5.setChecked(true);
+				break;
+			case 6:
+				RadioButton rb6 = (RadioButton) findViewById(R.id.rb3_6);
+				rb6.setChecked(true);
+				break;
+		}
+	}
 }

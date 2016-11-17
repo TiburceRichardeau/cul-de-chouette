@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:android1="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
 	android:background="@drawable/background"
 	android:textColor="#ffffff"  >
 		
@@ -37,14 +37,14 @@
 	    android1:textColor="#d7a91b"  />
 
         <LinearLayout
-            android:id="@+id/dice1layout"
-            android:layout_width="fill_parent"
-            android:layout_height="50dp"
-            android:padding="2dp"
-            android:layout_marginTop="0dp"
-            android:layout_marginBottom="3dp"
-            android:layout_centerHorizontal="true" 
-       		android:layout_below="@id/lblCurPlayer" >
+				android:id="@+id/dice1layout"
+				android:layout_width="fill_parent"
+				android:layout_height="50dp"
+				android:padding="2dp"
+				android:layout_marginTop="0dp"
+				android:layout_marginBottom="3dp"
+				android:layout_centerHorizontal="true"
+				android:layout_below="@id/lblCurPlayer" android:weightSum="1">
        		
             <ImageView
                 android1:layout_marginRight="5dp"
@@ -69,46 +69,58 @@
                     android1:layout_height="40dp"
                     android1:button="@drawable/sel_dice1"
                     android1:text="1"
-                    android1:textColor="@android:color/transparent" />
+                    android1:textColor="@android:color/transparent"
+					android:id="@+id/rb1_1"/>
 
                 <RadioButton
                     android1:button="@drawable/sel_dice2"
                     android:text="2"
                     android1:layout_width="40dp"
                     android1:layout_height="40dp"
-                    android1:textColor="@android:color/transparent" />
+                    android1:textColor="@android:color/transparent"
+					android:id="@+id/rb1_2" />
 
                 <RadioButton
                     android1:button="@drawable/sel_dice3"
                     android:text="3"
                     android1:layout_width="40dp"
                     android1:layout_height="40dp"
-                    android1:textColor="@android:color/transparent" />
+                    android1:textColor="@android:color/transparent"
+					android:id="@+id/rb1_3"/>
 
                 <RadioButton 
                     android1:button="@drawable/sel_dice4"
                     android:text="4"
                     android1:layout_width="40dp"
                     android1:layout_height="40dp"
-                    android1:textColor="@android:color/transparent" />
+                    android1:textColor="@android:color/transparent"
+					android:id="@+id/rb1_4" />
                 
                 <RadioButton 
                     android1:button="@drawable/sel_dice5"
                     android:text="5"
                     android1:layout_width="40dp"
                     android1:layout_height="40dp"
-                    android1:textColor="@android:color/transparent" />
+                    android1:textColor="@android:color/transparent"
+					android:id="@+id/rb1_5"/>
                 
                 <RadioButton 
                     android1:button="@drawable/sel_dice6"
                     android:text="6"
                     android1:layout_width="40dp"
                     android1:layout_height="40dp"
-                    android1:textColor="@android:color/transparent" />
+                    android1:textColor="@android:color/transparent"
+					android:id="@+id/rb1_6" />
                 
             </RadioGroup>
-                
-        </LinearLayout>
+			<ImageButton
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:id="@+id/imageButton"
+					android:src="@drawable/dice"
+					android:onClick="RandomDice1"/>
+
+		</LinearLayout>
 
         <LinearLayout
             android:id="@+id/dice2layout"
@@ -117,7 +129,7 @@
             android:padding="2dp"
             android:layout_marginTop="0dp"
             android:layout_marginBottom="3dp"
-            android:layout_centerHorizontal="true" 
+            android:layout_centerHorizontal="true"
        		android:layout_below="@id/dice1layout" >
        		
             <ImageView
@@ -142,45 +154,57 @@
                     android1:layout_height="40dp"
                     android1:button="@drawable/sel_dice1"
                     android1:text="1"
-                    android1:textColor="@android:color/transparent" />
+                    android1:textColor="@android:color/transparent"
+					android:id="@+id/rb2_1"/>
 
                 <RadioButton
                     android1:button="@drawable/sel_dice2"
                     android:text="2"
                     android1:layout_width="40dp"
                     android1:layout_height="40dp"
-                    android1:textColor="@android:color/transparent" />
+                    android1:textColor="@android:color/transparent"
+					android:id="@+id/rb2_2"/>
 
                 <RadioButton
                     android1:button="@drawable/sel_dice3"
                     android:text="3"
                     android1:layout_width="40dp"
                     android1:layout_height="40dp"
-                    android1:textColor="@android:color/transparent" />
+                    android1:textColor="@android:color/transparent"
+					android:id="@+id/rb2_3"/>
 
                 <RadioButton 
                     android1:button="@drawable/sel_dice4"
                     android:text="4"
                     android1:layout_width="40dp"
                     android1:layout_height="40dp"
-                    android1:textColor="@android:color/transparent" />
+                    android1:textColor="@android:color/transparent"
+					android:id="@+id/rb2_4"/>
                 
                 <RadioButton 
                     android1:button="@drawable/sel_dice5"
                     android:text="5"
                     android1:layout_width="40dp"
                     android1:layout_height="40dp"
-                    android1:textColor="@android:color/transparent" />
+                    android1:textColor="@android:color/transparent"
+					android:id="@+id/rb2_5"/>
                 
                 <RadioButton 
                     android1:button="@drawable/sel_dice6"
                     android:text="6"
                     android1:layout_width="40dp"
                     android1:layout_height="40dp"
-                    android1:textColor="@android:color/transparent" />
+                    android1:textColor="@android:color/transparent"
+					android:id="@+id/rb2_6"/>
 
             </RadioGroup>
-        </LinearLayout>
+			<ImageButton
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:id="@+id/imageButton2"
+					android:src="@drawable/dice"
+					android:onClick="RandomDice2"/>
+		</LinearLayout>
     
         <LinearLayout
             android:id="@+id/dice3layout"
@@ -214,45 +238,57 @@
                     android1:layout_height="40dp"
                     android1:button="@drawable/sel_dice1"
                     android1:text="1"
-                    android1:textColor="@android:color/transparent" />
+                    android1:textColor="@android:color/transparent"
+					android:id="@+id/rb3_1"/>
 
                 <RadioButton
                     android1:button="@drawable/sel_dice2"
                     android:text="2"
                     android1:layout_width="40dp"
                     android1:layout_height="40dp"
-                    android1:textColor="@android:color/transparent" />
+                    android1:textColor="@android:color/transparent"
+					android:id="@+id/rb3_2"/>
 
                 <RadioButton
                     android1:button="@drawable/sel_dice3"
                     android:text="3"
                     android1:layout_width="40dp"
                     android1:layout_height="40dp"
-                    android1:textColor="@android:color/transparent" />
+                    android1:textColor="@android:color/transparent"
+					android:id="@+id/rb3_3"/>
 
                 <RadioButton 
                     android1:button="@drawable/sel_dice4"
                     android:text="4"
                     android1:layout_width="40dp"
                     android1:layout_height="40dp"
-                    android1:textColor="@android:color/transparent" />
+                    android1:textColor="@android:color/transparent"
+					android:id="@+id/rb3_4"/>
                 
                 <RadioButton 
                     android1:button="@drawable/sel_dice5"
                     android:text="5"
                     android1:layout_width="40dp"
                     android1:layout_height="40dp"
-                    android1:textColor="@android:color/transparent" />
+                    android1:textColor="@android:color/transparent"
+					android:id="@+id/rb3_5"/>
                 
                 <RadioButton 
                     android1:button="@drawable/sel_dice6"
                     android:text="6"
                     android1:layout_width="40dp"
                     android1:layout_height="40dp"
-                    android1:textColor="@android:color/transparent" />
+                    android1:textColor="@android:color/transparent"
+					android:id="@+id/rb3_6"/>
 
             </RadioGroup>
-        </LinearLayout>
+			<ImageButton
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:id="@+id/imageButton3"
+					android:src="@drawable/dice"
+					android:onClick="RandomDice3"/>
+		</LinearLayout>
     
     	</RelativeLayout>
     	
