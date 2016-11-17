@@ -1,9 +1,6 @@
 package com.pierral.cdc;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Currency;
-import java.util.List;
+import java.util.*;
 
 import android.os.Bundle;
 import android.annotation.TargetApi;
@@ -12,12 +9,10 @@ import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.text.InputType;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,6 +42,7 @@ public class CDCGame extends ListActivity {
 	static final int CUL_DE_CHOUETTE = 4;
 	static final int BEVUE = 5;
 	static final int GRELOTTINE = 6;
+	static final int NEANT = 7;
 	
 	static final int SPECIAL_CIVET = 1;
 	static final int SPECIAL_GRELOTTINE = 2;
@@ -67,7 +63,8 @@ public class CDCGame extends ListActivity {
 	static final int DIALOG_BEVUE = 3;
 	static final int DIALOG_GRELOTTINE = 4;
 	static final int DIALOG_CIVET = 5;
-	
+	static final int DIALOG_NEANT = 6;
+
 	private class CDCPlayerGameAdapter extends ArrayAdapter<CDCPlayer> {
 
 		public CDCPlayerGameAdapter(Context context, int resource, int textViewResourceId,
@@ -134,7 +131,8 @@ public class CDCGame extends ListActivity {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
         	ActionBar actionBar = getActionBar();
         	actionBar.setDisplayHomeAsUpEnabled(true);
-        	actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbar_bg));
+        	//actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbar_bg));
+			actionBar.setBackgroundDrawable(getDrawable(R.drawable.actionbar_bg));
         	actionBar.setTitle("");
         }
         
@@ -223,7 +221,7 @@ public class CDCGame extends ListActivity {
 	 * Permet de passer au joueur suivant
 	 */
 	private void nextPlayer() {
-		//Changement de jouer
+		//Changement de joueur
     	m_curPlayerIndex = (m_curPlayerIndex + 1) % (m_listPlayers.size());
 		m_adapter.notifyDataSetChanged();
 		
@@ -259,8 +257,12 @@ public class CDCGame extends ListActivity {
         	rg3.clearCheck();
     	}
     }
-    
-    public void ValidateDice(View v) {
+
+	/**
+	 * Fonction appelé lors de la validation du lancé des dées
+	 * @param v
+	 */
+	public void ValidateDice(View v) {
     	
     	String v1 = "", v2 = "", v3 = "";
     	
@@ -284,11 +286,13 @@ public class CDCGame extends ListActivity {
 		v2 = (String)rb2.getText();
 		RadioButton rb3 = (RadioButton)findViewById(id3selected);
 		v3 = (String)rb3.getText();
-    		
-    	int[] combo = getCombo(Integer.parseInt(v1), Integer.parseInt(v2), Integer.parseInt(v3));
+		// Récupération du combo
+		int[] combo = getCombo(Integer.parseInt(v1), Integer.parseInt(v2), Integer.parseInt(v3));
     	
-
+		//Récupération de l'objet joueur
     	CDCPlayer curPlayer = m_listPlayers.get(m_curPlayerIndex);
+
+		//Si je joueur a gagné des point grace a un civet ou une grelotine
     	boolean special = (curPlayer.getCivetPoints() > 0 || curPlayer.getGrelottinePoints() > 0);
     	
     	validateCombo(curPlayer, combo, special, false);
@@ -342,6 +346,14 @@ public class CDCGame extends ListActivity {
 	    			choosePlayerDialog(getString(R.string.ChouetteVeluteQuestion), DIALOG_CHOUETTE_VELUTE, combo, false);
 	    		}
 	    		break;
+			case NEANT:
+				if (special) {
+					validateSpecialDice(combo, false);
+				}
+				else {
+					choosePlayerDialogGrelottine(combo);
+				}
+				break;
 	    	default:
 	    		if (CulDeChouette.COMPLETE) {
 	    			if (special) {
@@ -579,12 +591,14 @@ public class CDCGame extends ListActivity {
     }
     
     private int[] getCombo(int d1, int d2, int d3) {
+		boolean has_a_combo = false ;
     	int[] res = { -1, -1 };
     	// case CHOUETTE
     	if ( (d1 == d2 && d3 != d1)
     		|| (d1 == d3 && d2 != d1)
     		|| (d2 == d3 && d2 != d1)) {
     		res[0] = CHOUETTE;
+			has_a_combo = true;
     		// get value..
     		if (d1 == d2 || d1 == d3) {
     			res[1] = d1;
@@ -598,6 +612,7 @@ public class CDCGame extends ListActivity {
     			  || (d1 + d3 == d2)
     			  || (d2 + d3 == d1) ) {
     		res[0] = VELUTE;
+			has_a_combo = true;
     		// get value
     		if (d1 + d2 == d3) {
     			res[1] = d3;
@@ -613,12 +628,14 @@ public class CDCGame extends ListActivity {
     	else if (d1 == d2 && d2 == d3) {
     		res[0] = CUL_DE_CHOUETTE;
     		res[1] = d1;
+			has_a_combo = true;
     	}
     	// case CHOUETTE VELUTE
     	if ( (d1 == d2 && d1 + d2 == d3) 
     			 || (d1 == d3 && d1 + d3 == d2) 
     			 || (d2 == d3 && d2 + d3 == d1)) {
     		res[0] = CHOUETTE_VELUTE;
+			has_a_combo = true;
     		//get value
     		if (d1 == d2) {
     			res[1] = d3;
@@ -638,45 +655,16 @@ public class CDCGame extends ListActivity {
     			 || (d3 == d2-1 && d3 == d1-2) 
     			 || (d3 == d1-1 && d3 == d2-2) ){
     		res[0] = SUITE;
+			has_a_combo = true;
     	}
 
     	// Cas Néant
-    	
+    	if (!has_a_combo)
+		{
+			res[0] = NEANT;
+		}
     	return res;
     }
-
-	/**
-	 * Permet desélectionner un joueur
-	 * @param Qlbl Message
-	 * @param cancelable La fenetre peut elle etre fermée?
-	 * @param player Joueur en cours
-	 * @return Retourne l'index du joeur séléctionné
-	 */
-	private int selectOnePlayer(String Qlbl,boolean cancelable, int player)
-	{
-		final int[] selected_player = {-1};
-		final String[] items = new String[m_listPlayers.size()];
-		for (int i = 0; i < m_listPlayers.size(); ++i) {
-			if(i != player)
-				items[i] = m_listPlayers.get(i).getName();
-		}
-		//choosePlayerDialog(getString(R.string.BevueQuestion), DIALOG_BEVUE, bevue_combo, true);
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle(Qlbl);
-		//Affichage de la fenetre de sélection des joueurs
-		builder.setSingleChoiceItems(items,-1, new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog, int item) {
-				dialog.dismiss();
-				selected_player[0] = item;
-			}
-			}
-		);
-		builder.setCancelable(cancelable);
-		AlertDialog alert = builder.create();
-		alert.show();
-		//Toast.makeText(getApplicationContext(), selected_player[0], Toast.LENGTH_SHORT).show();
-		return selected_player[0];
-	}
 
     public void choosePlayerDialog(String Qlbl, final int which_dialog, final int[] wich_combo, boolean cancelable) {
     	//Liste des joueurs
@@ -711,9 +699,127 @@ public class CDCGame extends ListActivity {
     	AlertDialog alert = builder.create();
     	alert.show();
     }
-    
-    
-    public void loserSuite(int ind, int[] which_combo) {
+
+	/**
+	 * Fonction de gestion du néant.
+	 * Permet de vérifier qui a déjà une grelottine
+	 * @param Qlbl
+	 * @param combo
+	 */
+	public void choosePlayerDialogGrelottine(int[] combo) {
+		//Liste des joueurs avec grelottine
+		ArrayList<CDCPlayer> player_with_grelottine = listPlayerWithGrelottine();
+
+		// Si aucun joeur n'a de grelottine ou que seul le joeur en cours a une grelottine on n'affiche pas de message "Quelqu'un a dit Grelottine?"
+		if (player_with_grelottine.isEmpty())
+		{
+			if (!m_listPlayers.get(m_curPlayerIndex).hasGrelottine())
+			{
+				displayPointsInfo( m_listPlayers.get(m_curPlayerIndex), combo);
+			}
+		}
+		else
+		{
+			if (player_with_grelottine.size() == 1 && player_with_grelottine.get(0) == m_listPlayers.get(m_curPlayerIndex))
+			{
+				displayPointsInfo( m_listPlayers.get(m_curPlayerIndex), combo);
+			}
+			else
+			{
+				//On retire de la liste des grelottins possible le joueur actuel.
+				gestionDuNeant(player_with_grelottine);
+			}
+		}
+
+
+	}
+
+	/**
+	 * Permet de retourner la liste des joueurs qui ont une grelotine.
+	 * @return
+	 */
+	private ArrayList<CDCPlayer> listPlayerWithGrelottine()
+	{
+		ArrayList<CDCPlayer> list = new ArrayList<CDCPlayer>();
+		for (int i = 0; i < m_listPlayers.size() ; i++) {
+			if( m_listPlayers.get(i).hasGrelottine())
+			{
+				list.add(m_listPlayers.get(i));
+			}
+		}
+		return list;
+	}
+	
+	
+	/**
+	 * Demande si un joueur a crié grelottine ou non. Et réalise les actions en fonctions de la réponse.
+	 * @param item
+	 */
+	private void gestionDuNeant(ArrayList<CDCPlayer> list_player_grelottine) {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle(getString(R.string.GrelottineTitle))
+				.setMessage(getString(R.string.GrelottineQuestionDefie))
+				.setNegativeButton(getString(R.string.NoLbl), new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int id) {
+						//Si personne le défie
+						int[] combo = {NEANT,-1};
+						displayPointsInfo( m_listPlayers.get(m_curPlayerIndex), combo);
+					}
+				})
+				.setPositiveButton(getString(R.string.YesLbl), new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int id) {
+						//Si un joeur défis
+						selectOnePlayerGrelottine(list_player_grelottine);
+						//TODO Faire la gestion du pariage grelottine (utiliser les fonctions déjà présente)
+					}
+				});
+		AlertDialog alert = builder.create();
+		alert.show();
+	}
+
+	/**
+	 * Permet de sélectionner
+	 * @param list_player_grelottine liste des joueurs ayant une grelotine. NE CONTIENT PAS LE JOEUR EN COURS !
+	 */
+	public void selectOnePlayerGrelottine(ArrayList<CDCPlayer> list_player_grelottine)
+	{
+		final String[] items = new String[list_player_grelottine.size()];
+		for (int i = 0; i < list_player_grelottine.size(); ++i) {
+			if ( m_listPlayers.get(m_curPlayerIndex) != list_player_grelottine.get(i))
+				items[i] = list_player_grelottine.get(i).getName();
+		}
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle(R.string.GrelottineQuestionDefieQui);
+		//Affichage de la fenetre de sélection des joueurs
+		builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int item) {
+				String nom_grelottin = items[item];
+				int index_grelottin = indexOfPlayerWithName(nom_grelottin);
+				startGrelottine(index_grelottin);
+				dialog.dismiss();
+			}
+		});
+		builder.setCancelable(true);
+		AlertDialog alert = builder.create();
+		alert.show();
+	}
+
+	/**
+	 * Retourne l'index dans le tableau m_listePlayer du joueur donné en parametre.
+	 * @param name Nom du joueur.
+	 * @return Retourne l'index du jour (je ne parle pas du doigt...)
+	 */
+	private int indexOfPlayerWithName(String name)
+	{
+		for (int i = 0 ; i < m_listPlayers.size(); i ++)
+		{
+			if (m_listPlayers.get(i).getName().equals(name))
+				return i;
+		}
+		return -1;
+	}
+
+	public void loserSuite(int ind, int[] which_combo) {
     	
     	
     	CDCPlayer loser = m_listPlayers.get(ind);
@@ -778,9 +884,21 @@ public class CDCGame extends ListActivity {
 	    		msg = pl.getName() + " " + getString(R.string.PointsLoseLbl) + " " + points + " " 
 						+ getString(R.string.PointsLbl) + " " + getString(R.string.PointsWith) + " " + comboRealised + " !";
 				break;
-	    	case GRELOTTINE:
+	    	case GRELOTTINE :
+	    		//Un joueur a dit grelottine !
 	    		msg = pl.getName() + " " + getString(R.string.PointsWinLbl) + " " + comboRealised + " !";
 	    		break;
+			case NEANT:
+				//Aucun joueur n'a dit grelottine
+				//Si le joueur a déjà une grelottine
+				if (pl.hasGrelottine())
+					msg = pl.getName() + " " + getString(R.string.PointsKeepLbl) + " " + comboRealised + " !";
+				else
+				{
+					m_listPlayers.get(m_curPlayerIndex).setGrelottine(true);
+					msg = pl.getName() + " " + getString(R.string.PointsWinLbl) + " " + comboRealised + " !";
+				}
+				break;
     	}
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		AlertDialog alert;
@@ -816,7 +934,11 @@ public class CDCGame extends ListActivity {
     	choosePlayerDialog(getString(R.string.GrelottineStartQuestion), DIALOG_GRELOTTINE, null, true);
     }
 
-    private void startGrelottine(int grelottin_ind) {
+	/**
+	 * Verification si le grelotin a bien une grelottine et si le grelottin n'est pas le joueur courant (impossible dans la nouvelle version).
+	 * @param grelottin_ind Id du grelotin
+	 */
+	private void startGrelottine(int grelottin_ind) {
     	
     	//Joueur grelotin
 
@@ -831,8 +953,6 @@ public class CDCGame extends ListActivity {
     		m_curPlayerIndex = m_listPlayers.size() - 1;
     	}*/
 
-		m_curPlayerIndex = selectOnePlayer("test joueur",true,grelottin_ind);
-    	
     	if (grelottin_ind == m_curPlayerIndex)  {
     		Toast.makeText(getApplicationContext(), getString(R.string.ErrorAutoGrelottine), Toast.LENGTH_SHORT).show();
     		return; 
@@ -849,8 +969,11 @@ public class CDCGame extends ListActivity {
 		
 		displayGrelottinePoints();
 	}
-    
-    private void displayGrelottinePoints() {
+
+	/**
+	 * Affiche la fennetre demandant sur combien de points la grelottine est faite.
+	 */
+	private void displayGrelottinePoints() {
     	AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
 		// Set an EditText view to get user input 
@@ -887,7 +1010,9 @@ public class CDCGame extends ListActivity {
 		alert.setNegativeButton(getString(R.string.CancerlLbl), new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int whichButton) {
 				CDCPlayer grelottin = m_listPlayers.get(curPlayer.getGrelottin());
+				// Le joueur a annulé on redonne donc la grelottine au grelottin et également au joueur en cours qui vient de la gagner.
 				grelottin.setGrelottine(true);
+				m_listPlayers.get(m_curPlayerIndex).setGrelottine(true);
 				nextPlayer();
 			 }
 			  

@@ -49,6 +49,7 @@
     <string name="CancelGameSentence">Etes vous sûr de vouloir arrêter la partie ? Toutes les points vont être remis à zéro !!gagne</string>
     <string name="PointsWinLbl">gagne</string>
     <string name="PointsLoseLbl">perd</string>
+    <string name="PointsKeepLbl">conserve</string>
     <string name="PointsLbl">point(s)</string>
     <string name="PointsWith">avec</string>
     <string name="PointsOf">de</string>
@@ -63,6 +64,7 @@
         <item>une Suite</item>
         <item>un Cul de Chouette</item>
         <item>une bévue</item>
+        <item>une grelottine</item>
         <item>une grelottine</item>
     </string-array>
     
@@ -100,6 +102,9 @@
     <string name="GrelottineStartQuestion">Qui est le grelottin ?</string>
     <string name="ErrorGrelottineStart">n\'a pas de grelottine !!</string>
     <string name="GrelottinePointsQuestion"> est défié(e) sur combien de points ?</string>
+    <string name="GrelottineQuestionDefie"> Un joueur te défie à grelottine ?</string>
+    <string name="GrelottineQuestionDefieQui"> Qui te défie ?</string>
+    <string name="GrelottineTitle"> Grelotine</string>
     <string name="ErrorGrelottinePoints1">La mise doit être comprise entre 0 et</string>
     <string name="ErrorGrelottinePoints2">points !</string>
     <string name="GrelottineEndWin">les gagne !</string>

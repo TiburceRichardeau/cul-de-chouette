@@ -34,6 +34,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * Classe de l'accueil
+ */
 public class CulDeChouette extends ListActivity {
 	
 	public final static String PLAYERS = "players_list" ;
