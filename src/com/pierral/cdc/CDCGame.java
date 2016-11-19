@@ -2,6 +2,7 @@ package com.pierral.cdc;
 
 import java.util.*;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.annotation.TargetApi;
 import android.app.ActionBar;
@@ -119,6 +120,12 @@ public class CDCGame extends ListActivity {
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+		// Permet de gérer le mode paysage sur tablette
+		if(getResources().getBoolean(R.bool.portrait_only)){
+			setRequestedOrientation(android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+		}else {
+			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+		}
         setContentView(R.layout.activity_game);
         tf = Typeface.createFromAsset(getAssets(), "Cardinal.ttf");
         

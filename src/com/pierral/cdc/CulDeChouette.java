@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.annotation.TargetApi;
@@ -97,6 +98,12 @@ public class CulDeChouette extends ListActivity {
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+		// Permet de gérer le mode paysage sur tablette
+		if(getResources().getBoolean(R.bool.portrait_only)){
+			setRequestedOrientation(android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+		}else {
+			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+		}
         setContentView(R.layout.activity_cul_de_chouette);
         
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
