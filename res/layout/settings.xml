@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen
-  xmlns:android="http://schemas.android.com/apk/res/android" android:orderingFromXml="true">
+  xmlns:android="http://schemas.android.com/apk/res/android" android:orderingFromXml="true" android:layout_height="wrap_content" android:layout_width="wrap_content">
   <PreferenceCategory
   	android:title="@string/SettingsGeneralCategory">
   	<CheckBoxPreference
@@ -16,4 +16,31 @@
   	  android:key="Complete">
   	</CheckBoxPreference>
   </PreferenceCategory>
+	<PreferenceCategory
+			android:title="@string/SettingsGameCategory">
+		<CheckBoxPreference
+				android:title="@string/SettingsPlaywithGrelottine"
+				android:defaultValue="true"
+				android:summary="@string/SettingsPlaywithGrelottineSum"
+				android:key="PlayWithGrelottine">
+		</CheckBoxPreference>
+		<CheckBoxPreference
+				android:title="@string/SettingsPlaywithBoucliette"
+				android:defaultValue="true"
+				android:summary="@string/SettingsPlaywithBouclietteSum"
+				android:key="PlaywithBoucliette">
+		</CheckBoxPreference>
+		<CheckBoxPreference
+				android:title="@string/SettingsPlaywithAchatDeDee"
+				android:defaultValue="true"
+				android:summary="@string/SettingsPlaywithAchatDeDeeSum"
+				android:key="PlaywithAchatDeDee">
+		</CheckBoxPreference>
+		<Preference
+				android:key="ValueBevue"
+				android:defaultValue="5"
+				android:summary="@string/SettingsValueBevueSum"
+				android:title="@string/SettingsValueBevue" />
+
+	</PreferenceCategory>
 </PreferenceScreen>

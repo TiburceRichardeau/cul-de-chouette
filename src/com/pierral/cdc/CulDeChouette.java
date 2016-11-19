@@ -51,6 +51,10 @@ public class CulDeChouette extends ListActivity {
 
 	static public boolean AUTO_SAVE = true;
 	static public boolean COMPLETE = true;
+    static public int VALEUR_BEVUE = 5;
+    static public boolean GRELOTTINE = true;
+    static public boolean BOUCLIETTE = true;
+    static public boolean ACHAT_DEE = true;
 	
 	private SharedPreferences sharedPrefs;
 	
@@ -160,8 +164,14 @@ public class CulDeChouette extends ListActivity {
 	
 
     public void setPreferences() {
+        //Récupération des données préférences
 		AUTO_SAVE = sharedPrefs.getBoolean("AutoSave", true);	
 		COMPLETE = sharedPrefs.getBoolean("Complete", true);
+        GRELOTTINE = sharedPrefs.getBoolean("PlayWithGrelottine",true);
+        ACHAT_DEE = sharedPrefs.getBoolean("PlaywithAchatDeDee",true);
+        BOUCLIETTE = sharedPrefs.getBoolean("PlaywithBoucliette",true);
+        VALEUR_BEVUE = sharedPrefs.getInt("ValueBevue",5);
+
 	}
 	
 	private void clear() {

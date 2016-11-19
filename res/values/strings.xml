@@ -10,6 +10,15 @@
     <string name="PointsLabelShort">pts</string>
     
     <string name="SettingsGeneralCategory">Paramètres généraux</string>
+    <string name="SettingsGameCategory">Paramètres de jeux</string>
+    <string name="SettingsPlaywithGrelottine">Grelottine</string>
+    <string name="SettingsPlaywithGrelottineSum">Jouer avec la Grelottine</string>
+    <string name="SettingsPlaywithBoucliette">Boucliette</string>
+    <string name="SettingsPlaywithBouclietteSum">Jouer avec la Boucliette</string>
+    <string name="SettingsPlaywithAchatDeDee">Achat de dee</string>
+    <string name="SettingsPlaywithAchatDeDeeSum">Jouer avec les achats de dées</string>
+    <string name="SettingsValueBevue">Valeur de la bévue</string>
+    <string name="SettingsValueBevueSum">Mofifier la valeur de la Bévue (Défault 5)</string>
     <string name="SettingsSaveOnExit">Sauvegarder les joueurs</string>
     <string name="SettingsSaveOnExitSum">Sauvegarde le nom des joueurs avant de quitter l\'application</string>
     <string name="SettingsComplete">Règles complètes</string>
