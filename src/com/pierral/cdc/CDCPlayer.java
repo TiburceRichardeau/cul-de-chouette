@@ -14,6 +14,7 @@ public class CDCPlayer implements Serializable {
 	private int mCivetPoints;
 	private int mCivetBet;
 	private boolean mHasGrelottine;
+	private boolean mHasBoucliette;
 	private int mGrelottinePoints;
 	private int mGrelottineBet;
 	private int mIndGrelottin;
@@ -175,11 +176,21 @@ public class CDCPlayer implements Serializable {
 	public int getGrelottineBet() {
 		return this.mGrelottineBet;
 	}
-	
+
+	/**
+	 * get boucliette
+	 * @return boolean
+	 */
+	public boolean hasBoucliette() {return this.mHasBoucliette;}
+
+	/**
+	 * @param boucliette
+	 */
+	public void setBoucliette(boolean boucliette) {mHasBoucliette = boucliette;}
 
 	/**
 	 * set grelottin index
-	 * @param bet
+	 * @param index
 	 */
 	public void setGrelottin(int index) {
 		this.mIndGrelottin = index;

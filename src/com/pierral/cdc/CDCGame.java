@@ -2,6 +2,7 @@ package com.pierral.cdc;
 
 import java.util.*;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.annotation.TargetApi;
 import android.app.ActionBar;
@@ -37,6 +38,8 @@ public class CDCGame extends ListActivity {
 	static final int BEVUE = 5;
 	static final int GRELOTTINE = 6;
 	static final int NEANT = 7;
+
+	static int POINT_BEVUE;
 	
 	static final int SPECIAL_CIVET = 1;
 	static final int SPECIAL_GRELOTTINE = 2;
@@ -107,9 +110,6 @@ public class CDCGame extends ListActivity {
 					}
 				}
 			}
-			
-			
-			
 			return v;
 		}
 		
@@ -119,6 +119,12 @@ public class CDCGame extends ListActivity {
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+		// Permet de gérer le mode paysage sur tablette
+		if(getResources().getBoolean(R.bool.portrait_only)){
+			setRequestedOrientation(android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+		}else {
+			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+		}
         setContentView(R.layout.activity_game);
         tf = Typeface.createFromAsset(getAssets(), "Cardinal.ttf");
         
@@ -129,7 +135,9 @@ public class CDCGame extends ListActivity {
 			//actionBar.setBackgroundDrawable(getDrawable(R.drawable.actionbar_bg));
         	actionBar.setTitle("");
         }
-        
+
+        POINT_BEVUE = CulDeChouette.VALEUR_BEVUE;
+
         // set fonts
         Button bt = (Button) findViewById(R.id.validateDiceBtn);
         bt.setTypeface(tf);
@@ -702,7 +710,6 @@ public class CDCGame extends ListActivity {
 	/**
 	 * Fonction de gestion du néant.
 	 * Permet de vérifier qui a déjà une grelottine
-	 * @param Qlbl
 	 * @param combo
 	 */
 	public void choosePlayerDialogGrelottine(int[] combo) {
@@ -752,7 +759,6 @@ public class CDCGame extends ListActivity {
 	
 	/**
 	 * Demande si un joueur a crié grelottine ou non. Et réalise les actions en fonctions de la réponse.
-	 * @param item
 	 */
 	private void gestionDuNeant(ArrayList<CDCPlayer> list_player_grelottine) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -836,7 +842,7 @@ public class CDCGame extends ListActivity {
     public void loserBevue(int ind, int[] bevue_combo) {
 		//Joueur qui a fait une bévue
     	CDCPlayer loser = m_listPlayers.get(ind);
-    	loser.addPoints(-5);
+    	loser.addPoints(-1 * POINT_BEVUE);
 
     	displayPointsInfo(loser, bevue_combo);
     }
@@ -879,7 +885,7 @@ public class CDCGame extends ListActivity {
 
 				break;
 	    	case BEVUE:
-	    		points = 5;
+	    		points = CulDeChouette.VALEUR_BEVUE;
 	    		msg = pl.getName() + " " + getString(R.string.PointsLoseLbl) + " " + points + " " 
 						+ getString(R.string.PointsLbl) + " " + getString(R.string.PointsWith) + " " + comboRealised + " !";
 				break;

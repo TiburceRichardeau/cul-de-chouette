@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- NE PAS UTILISER CE FICHIER !! UTILISER LE FICHIER '/res/xml/preferences.xml' -->
 <PreferenceScreen
   xmlns:android="http://schemas.android.com/apk/res/android" android:orderingFromXml="true" android:layout_height="wrap_content" android:layout_width="wrap_content">
   <PreferenceCategory
@@ -36,11 +37,5 @@
 				android:summary="@string/SettingsPlaywithAchatDeDeeSum"
 				android:key="PlaywithAchatDeDee">
 		</CheckBoxPreference>
-		<Preference
-				android:key="ValueBevue"
-				android:defaultValue="5"
-				android:summary="@string/SettingsValueBevueSum"
-				android:title="@string/SettingsValueBevue" />
-
 	</PreferenceCategory>
 </PreferenceScreen>

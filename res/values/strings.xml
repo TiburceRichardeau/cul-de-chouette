@@ -15,14 +15,15 @@
     <string name="SettingsPlaywithGrelottineSum">Jouer avec la Grelottine</string>
     <string name="SettingsPlaywithBoucliette">Boucliette</string>
     <string name="SettingsPlaywithBouclietteSum">Jouer avec la Boucliette</string>
-    <string name="SettingsPlaywithAchatDeDee">Achat de dee</string>
+    <string name="SettingsPlaywithAchatDeDee">Achat de dées</string>
     <string name="SettingsPlaywithAchatDeDeeSum">Jouer avec les achats de dées</string>
     <string name="SettingsValueBevue">Valeur de la bévue</string>
-    <string name="SettingsValueBevueSum">Mofifier la valeur de la Bévue (Défault 5)</string>
+    <string name="SettingsValueBevueSum">Mofifier la valeur de la Bévue (Défaut 5)</string>
     <string name="SettingsSaveOnExit">Sauvegarder les joueurs</string>
     <string name="SettingsSaveOnExitSum">Sauvegarde le nom des joueurs avant de quitter l\'application</string>
     <string name="SettingsComplete">Règles complètes</string>
     <string name="SettingsCompleteSum">Jouer avec les règles complètes (Sirotage, Civet, Grelotine..)</string>
+
     
     <string name="title_activity_cul_de_chouette">Le Cul de Chouette</string>
     <string name="PlayButtonLbl">Lancer la partie</string>

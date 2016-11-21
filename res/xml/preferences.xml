@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+            android:title="@string/SettingsGeneralCategory">
+        <CheckBoxPreference
+                android:title="@string/SettingsSaveOnExit"
+                android:defaultValue="true"
+                android:summary="@string/SettingsSaveOnExitSum"
+                android:key="AutoSave">
+        </CheckBoxPreference>
+        <CheckBoxPreference
+                android:title="@string/SettingsComplete"
+                android:defaultValue="true"
+                android:summary="@string/SettingsCompleteSum"
+                android:key="Complete">
+        </CheckBoxPreference>
+    </PreferenceCategory>
+    <PreferenceCategory
+            android:title="@string/SettingsGameCategory">
+        <CheckBoxPreference
+                android:title="@string/SettingsPlaywithGrelottine"
+                android:defaultValue="true"
+                android:summary="@string/SettingsPlaywithGrelottineSum"
+                android:key="PlayWithGrelottine">
+        </CheckBoxPreference>
+        <CheckBoxPreference
+                android:title="@string/SettingsPlaywithBoucliette"
+                android:defaultValue="true"
+                android:summary="@string/SettingsPlaywithBouclietteSum"
+                android:key="PlaywithBoucliette">
+        </CheckBoxPreference>
+        <CheckBoxPreference
+                android:title="@string/SettingsPlaywithAchatDeDee"
+                android:defaultValue="true"
+                android:summary="@string/SettingsPlaywithAchatDeDeeSum"
+                android:key="PlaywithAchatDeDee">
+        </CheckBoxPreference>
+        <ListPreference
+                android:title="@string/SettingsValueBevue"
+                android:summary="%s"
+                android:key="ValueBevueCb"
+                android:entryValues="@array/SettingsBevueValues"
+                android:defaultValue="5"
+                android:entries="@array/SettingsBevueValues"/>
+
+    </PreferenceCategory>
+</PreferenceScreen>
