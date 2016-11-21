@@ -55,7 +55,7 @@ public class CulDeChouette extends ListActivity {
     static public int VALEUR_BEVUE = 5;
     static public boolean GRELOTTINE = true;
     static public boolean BOUCLIETTE = true;
-    static public boolean ACHAT_DEE = true;
+    static public boolean ACHAT_DE = true;
 	
 	private SharedPreferences sharedPrefs;
 	
@@ -175,7 +175,7 @@ public class CulDeChouette extends ListActivity {
 		AUTO_SAVE = sharedPrefs.getBoolean("AutoSave", true);	
 		COMPLETE = sharedPrefs.getBoolean("Complete", true);
         GRELOTTINE = sharedPrefs.getBoolean("PlayWithGrelottine",true);
-        ACHAT_DEE = sharedPrefs.getBoolean("PlaywithAchatDeDee",true);
+        ACHAT_DE = sharedPrefs.getBoolean("PlaywithAchatDeDee",true);
         BOUCLIETTE = sharedPrefs.getBoolean("PlaywithBoucliette",true);
         VALEUR_BEVUE = Integer.parseInt(sharedPrefs.getString("ValueBevue", "5"));
 

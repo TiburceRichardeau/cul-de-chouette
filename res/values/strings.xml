@@ -15,8 +15,8 @@
     <string name="SettingsPlaywithGrelottineSum">Jouer avec la Grelottine</string>
     <string name="SettingsPlaywithBoucliette">Boucliette</string>
     <string name="SettingsPlaywithBouclietteSum">Jouer avec la Boucliette</string>
-    <string name="SettingsPlaywithAchatDeDee">Achat de dées</string>
-    <string name="SettingsPlaywithAchatDeDeeSum">Jouer avec les achats de dées</string>
+    <string name="SettingsPlaywithAchatDeDe">Achat de dés</string>
+    <string name="SettingsPlaywithAchatDeDeSum">Jouer avec les achats de dés</string>
     <string name="SettingsValueBevue">Valeur de la bévue</string>
     <string name="SettingsValueBevueSum">Mofifier la valeur de la Bévue (Défaut 5)</string>
     <string name="SettingsSaveOnExit">Sauvegarder les joueurs</string>
@@ -256,9 +256,21 @@ En cas d’échec = Perte des points misés mais gain des points de la combinais
  	
  	<string name="NoticeBevueTitle">Bévue</string>
  	<string name="NoticeBevueNotice">Définition :\n
-Un joueur se trompe, que ce soit dans l’annonce ou dans son tour de jeu…\n
+Un joueur se trompe, que ce soit dans l\’annonce ou dans son tour de jeu…\n
 Exemple :\n
 Crier “Sans fin est la moisissure des bières bretonne” alors que tous les joueurs n’ont pas dit “Grelotte ça picote” est une bévue.\n
 Les points :\n
 Perte de 5 points.</string>
+
+    <string name="NoticeGrainesTitle">Les Graines</string>
+    <string name="NoticeGrainesNotice">Lorsqu’un joueur se lève en cours de partie, il doit crier “Je ne mange pas de graines !” avant de se rasseoir.\n
+        Si un joueur se rassoit à la table ou à l’aire de jeu sans crier l’annonce, il y a Bévue.</string>
+
+
+    <string name="NoticeAdd">Règles Additionnelles</string>
+
+    <string name="NoticeBoucletteTitle">Boucliette</string>
+    <string name="NoticeBoucletteNotice">Chaque joueur dès le début possède une boucliette qui l’autorise à éviter un défi le concernant lui ou un autre joueur.</string>
+
+    <string name="Lancer2De">Lancer les 2 premiers dés</string>
 </resources>

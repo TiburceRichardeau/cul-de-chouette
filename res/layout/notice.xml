@@ -213,6 +213,47 @@
         android:layout_height="wrap_content"
         android:padding="2dp"
         android:text="@string/NoticeBevueNotice" />
+
+    <TextView
+            android:id="@+id/ngrainestitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:padding="3dp"
+            android:text="@string/NoticeGrainesTitle" />
+
+    <TextView
+            android:id="@+id/ngrainesnotice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:text="@string/NoticeGrainesNotice" />
+
+
+
+    <TextView
+            android:id="@+id/NoticeAdd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:padding="5dp"
+            android:text="@string/NoticeAdd"
+            android:textSize="@dimen/padding_large" />
+
+    <TextView
+            android:id="@+id/nboucliettetitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:padding="3dp"
+            android:text="@string/NoticeBoucletteTitle" />
+
+    <TextView
+            android:id="@+id/nboucliettenotice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:text="@string/NoticeBoucletteNotice" />
     
 </LinearLayout>
 </ScrollView>

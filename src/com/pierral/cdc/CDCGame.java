@@ -156,8 +156,12 @@ public class CDCGame extends ListActivity {
         tv.setTypeface(tf);
         
         if (!CulDeChouette.COMPLETE) {
-        	LinearLayout ll = (LinearLayout) findViewById(R.id.customActionLayout);
-        	ll.setVisibility(LinearLayout.GONE);
+        	//LinearLayout ll = (LinearLayout) findViewById(R.id.customActionLayout);
+        	//ll.setVisibility(LinearLayout.GONE);
+            Button btBevue = (Button) findViewById(R.id.bevueBtn);
+			btBevue.setVisibility(Button.GONE);
+            Button btCivet = (Button) findViewById(R.id.civetBtn);
+            btCivet.setVisibility(Button.GONE);
         }
         
         Bundle bundle = getIntent().getExtras();
@@ -1320,6 +1324,9 @@ public class CDCGame extends ListActivity {
 		rb.setEnabled(true);
 	}
 
+	/*
+	Permet de désactiver les dés virutels une fois lancé ou non utilisé
+	 */
 	public void disableVirtualDice(View v){
 		Button bt = (Button) findViewById(R.id.randomDiceBtn);
 		bt.setEnabled(false);
