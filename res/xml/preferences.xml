@@ -30,9 +30,9 @@
                 android:key="PlaywithBoucliette">
         </CheckBoxPreference>
         <CheckBoxPreference
-                android:title="@string/SettingsPlaywithAchatDeDe"
+                android:title="@string/SettingsPlaywithAchatDeDee"
                 android:defaultValue="true"
-                android:summary="@string/SettingsPlaywithAchatDeDeSum"
+                android:summary="@string/SettingsPlaywithAchatDeDeeSum"
                 android:key="PlaywithAchatDeDee">
         </CheckBoxPreference>
         <ListPreference

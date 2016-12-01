@@ -42,20 +42,20 @@ public class CulDeChouette extends ListActivity {
 	
 	public final static String PLAYERS = "players_list" ;
 	
-	private ArrayList<CDCPlayer> m_listPlayers = new ArrayList<CDCPlayer>();
+	private ArrayList<CDCPlayer> m_listPlayers = new ArrayList<>();
 	private ArrayAdapter<CDCPlayer> m_adapter;
 	
 	private String m_contextFileName;
 	
 	public static Typeface typeFace = null;
-	
 
-	static public boolean AUTO_SAVE = true;
-	static public boolean COMPLETE = true;
-    static public int VALEUR_BEVUE = 5;
-    static public boolean GRELOTTINE = true;
-    static public boolean BOUCLIETTE = true;
-    static public boolean ACHAT_DE = true;
+
+	public static boolean AUTO_SAVE = true;
+	public static boolean COMPLETE = true;
+	public static int VALEUR_BEVUE = 5;
+	public static boolean GRELOTTINE = true;
+	public static boolean BOUCLIETTE = true;
+	public static boolean ACHAT_DEE = true;
 	
 	private SharedPreferences sharedPrefs;
 	
@@ -170,14 +170,14 @@ public class CulDeChouette extends ListActivity {
 	}
 	
 
-    public void setPreferences() {
+    private void setPreferences() {
         //Récupération des données préférences
 		AUTO_SAVE = sharedPrefs.getBoolean("AutoSave", true);	
 		COMPLETE = sharedPrefs.getBoolean("Complete", true);
         GRELOTTINE = sharedPrefs.getBoolean("PlayWithGrelottine",true);
-        ACHAT_DE = sharedPrefs.getBoolean("PlaywithAchatDeDee",true);
+        ACHAT_DEE = sharedPrefs.getBoolean("PlaywithAchatDeDee",true);
         BOUCLIETTE = sharedPrefs.getBoolean("PlaywithBoucliette",true);
-        VALEUR_BEVUE = Integer.parseInt(sharedPrefs.getString("ValueBevue", "5"));
+        VALEUR_BEVUE = Integer.parseInt(sharedPrefs.getString("ValueBevueCb", "5"));
 
 	}
 	
@@ -188,7 +188,7 @@ public class CulDeChouette extends ListActivity {
 		
 		alert.setTitle(getString(R.string.delPlayerTitle));
 
-		alert.setPositiveButton(getString(R.string.OkLbl), new DialogInterface.OnClickListener() {
+		alert.setPositiveButton(getString(R.string.ValiderLbl), new DialogInterface.OnClickListener() {
 		public void onClick(DialogInterface dialog, int whichButton) {
 			m_listPlayers.clear();
 			m_adapter.notifyDataSetChanged();
@@ -212,7 +212,7 @@ public class CulDeChouette extends ListActivity {
     	}
     }
     
-    public void launchSettings() {
+    private void launchSettings() {
     	Intent t = new Intent(getApplicationContext(), SettingsActivity.class);
 		this.startActivityForResult(t, 2);
     }
@@ -252,7 +252,7 @@ public class CulDeChouette extends ListActivity {
 		
 		alert.setTitle(getString(R.string.addPlayerTitle));
 
-		alert.setPositiveButton(getString(R.string.OkLbl), new DialogInterface.OnClickListener() {
+		alert.setPositiveButton(getString(R.string.ValiderLbl), new DialogInterface.OnClickListener() {
 		public void onClick(DialogInterface dialog, int whichButton) {
 		  String value = input.getText().toString();
 		  if (value.length() > 0) {
@@ -285,7 +285,7 @@ public class CulDeChouette extends ListActivity {
 		
 		alert.setTitle(getString(R.string.delPlayerTitle));
 
-		alert.setPositiveButton(getString(R.string.OkLbl), new DialogInterface.OnClickListener() {
+		alert.setPositiveButton(getString(R.string.ValiderLbl), new DialogInterface.OnClickListener() {
 		public void onClick(DialogInterface dialog, int whichButton) {
 		  m_listPlayers.remove(position);
 		  m_adapter.notifyDataSetChanged();

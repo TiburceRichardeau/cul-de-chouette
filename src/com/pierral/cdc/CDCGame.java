@@ -13,7 +13,6 @@ import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.text.InputType;
-import android.text.method.CharacterPickerDialog;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -89,16 +88,33 @@ public class CDCGame extends ListActivity {
 				n = (TextView) v.findViewById(R.id.playerGamePoints);
 				n.setText(p.getPoints() + (p.getPoints()
 						> 1 || p.getPoints() < -1 ? getString(R.string.PointsLabelShort) : getString(R.string.PointLabelShort)));
+
+                n = (TextView) v.findViewById(R.id.playerGameBoucliette);
+                n.setText(" ");
+                //Si la regle de la boucliette est en place
+                if(CulDeChouette.BOUCLIETTE)
+                {
+                    if (p.hasBoucliette()) {
+                        n.setCompoundDrawablesWithIntrinsicBounds(
+								R.drawable.boucliette, 0, 0, 0);
+                    }
+                }
+
+
 				n = (TextView) v.findViewById(R.id.playerGameGrelotine);
 				n.setText(" ");
-				if (p.hasGrelottine()) {
-					if (p.getGrelottinePoints() > 0) {
-						n.setText("G:"+p.getGrelottinePoints()+"pts");
-					}
-					else {
-						n.setText("G");
+				if (CulDeChouette.GRELOTTINE)
+				{
+					if (p.hasGrelottine()) {
+						if (p.getGrelottinePoints() > 0) {
+							n.setText("G:"+p.getGrelottinePoints()+"pts");
+						}
+						else {
+							n.setText("G");
+						}
 					}
 				}
+
 				n = (TextView) v.findViewById(R.id.playerGameCivet);
 				n.setText(" ");
 				if (p.hasCivet()) {
@@ -138,6 +154,7 @@ public class CDCGame extends ListActivity {
 
         POINT_BEVUE = CulDeChouette.VALEUR_BEVUE;
 
+
         // set fonts
         Button bt = (Button) findViewById(R.id.validateDiceBtn);
         bt.setTypeface(tf);
@@ -154,22 +171,24 @@ public class CDCGame extends ListActivity {
         
         tv = (TextView) findViewById(R.id.scoreTitleLbl);
         tv.setTypeface(tf);
-        
+        /*
         if (!CulDeChouette.COMPLETE) {
-        	//LinearLayout ll = (LinearLayout) findViewById(R.id.customActionLayout);
-        	//ll.setVisibility(LinearLayout.GONE);
-            Button btBevue = (Button) findViewById(R.id.bevueBtn);
-			btBevue.setVisibility(Button.GONE);
-            Button btCivet = (Button) findViewById(R.id.civetBtn);
-            btCivet.setVisibility(Button.GONE);
-        }
+        	LinearLayout ll = (LinearLayout) findViewById(R.id.customActionLayout);
+        	ll.setVisibility(LinearLayout.GONE);
+        }*/
         
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
         	ArrayList<CDCPlayer> param = (ArrayList<CDCPlayer>)bundle.getSerializable(CulDeChouette.PLAYERS);
         	if (param != null) {
         		m_listPlayers.addAll(param);
-	        	m_titleTV = (TextView) findViewById(R.id.lblCurPlayer);
+                //On atribut aux joueurs une boucliette
+                for (int i = 0; i < m_listPlayers.size(); i++)
+                {
+                    m_listPlayers.get(i).setBoucliette(true);
+                }
+
+                m_titleTV = (TextView) findViewById(R.id.lblCurPlayer);
 	        	
 	        	// set to -1 at the beginning because nextPlayer is adding 1
 	            m_curPlayerIndex = -1;
@@ -195,7 +214,7 @@ public class CDCGame extends ListActivity {
 		
 		alert.setTitle(getString(R.string.CancelGameLbl));
 
-		alert.setPositiveButton(getString(R.string.OkLbl), new DialogInterface.OnClickListener() {
+		alert.setPositiveButton(getString(R.string.ValiderLbl), new DialogInterface.OnClickListener() {
 		public void onClick(DialogInterface dialog, int whichButton) {
 		  cancelGame();
 		}
@@ -236,7 +255,7 @@ public class CDCGame extends ListActivity {
     		AlertDialog.Builder builder = new AlertDialog.Builder(this);
         	builder.setMessage(winner.getName() + " " + getString(R.string.WinTheGame) + " " + winner.getPoints() + " " + getString(R.string.PointsLbl) + " !")
         	       .setCancelable(false)
-        	       .setPositiveButton(getString(R.string.OkLbl), new DialogInterface.OnClickListener() {
+        	       .setPositiveButton(getString(R.string.ValiderLbl), new DialogInterface.OnClickListener() {
         	           public void onClick(DialogInterface dialog, int id) {
         	        	   cancelGame();
         	           }
@@ -255,12 +274,7 @@ public class CDCGame extends ListActivity {
     			disableCivetButton();
     		}
 
-        	RadioGroup rg1 = (RadioGroup) findViewById(R.id.dice1group);
-        	rg1.clearCheck();
-        	RadioGroup rg2 = (RadioGroup) findViewById(R.id.dice2group);
-        	rg2.clearCheck();
-        	RadioGroup rg3 = (RadioGroup) findViewById(R.id.dice3group);
-        	rg3.clearCheck();
+        	clearDices();
 			usedDice=false;
 			Button btn = (Button) findViewById(R.id.randomDiceBtn);
 			btn.setClickable(true);
@@ -268,6 +282,19 @@ public class CDCGame extends ListActivity {
 			EnableRb();
     	}
     }
+
+	/**
+	 * Permet de décocher les dées
+	 */
+	private void clearDices()
+	{
+		RadioGroup rg1 = (RadioGroup) findViewById(R.id.dice1group);
+		rg1.clearCheck();
+		RadioGroup rg2 = (RadioGroup) findViewById(R.id.dice2group);
+		rg2.clearCheck();
+		RadioGroup rg3 = (RadioGroup) findViewById(R.id.dice3group);
+		rg3.clearCheck();
+	}
 
 	/**
 	 * Fonction appelé lors de la validation du lancé des dées
@@ -303,13 +330,14 @@ public class CDCGame extends ListActivity {
 		//Récupération de l'objet joueur
     	CDCPlayer curPlayer = m_listPlayers.get(m_curPlayerIndex);
 
-		//Si je joueur a gagné des point grace a un civet ou une grelotine
+		//Si je joueur a gagné des point grace à un civet ou une grelottine
     	boolean special = (curPlayer.getCivetPoints() > 0 || curPlayer.getGrelottinePoints() > 0);
     	
     	validateCombo(curPlayer, combo, special, false);
     	
     }
-    
+
+
     public void validateCombo(CDCPlayer curPlayer, int[] combo, boolean special, boolean specialPlayed) {
     	
     	// compute combo
@@ -362,7 +390,14 @@ public class CDCGame extends ListActivity {
 					validateSpecialDice(combo, false);
 				}
 				else {
-					choosePlayerDialogGrelottine(combo);
+					if(CulDeChouette.GRELOTTINE)
+						choosePlayerDialogGrelottine(combo);
+					else
+					{
+						int[] grelottine_combo = { NEANT, -1 };
+						displayPointsInfo(curPlayer, grelottine_combo);
+					}
+
 				}
 				break;
 	    	default:
@@ -428,7 +463,7 @@ public class CDCGame extends ListActivity {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
     	builder.setMessage(msg)
     	       .setCancelable(false)
-    	       .setPositiveButton(getString(R.string.OkLbl), new DialogInterface.OnClickListener() {
+    	       .setPositiveButton(getString(R.string.ValiderLbl), new DialogInterface.OnClickListener() {
     	           public void onClick(DialogInterface dialog, int id) {
     	        	   validateCombo(curPlayer, combo, false, true);
     	           }
@@ -542,7 +577,7 @@ public class CDCGame extends ListActivity {
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
 	    	builder.setMessage(betPlayerName + " " + (betPlayerNb > 1 ? getString(R.string.SirotageBetResultMultiple) : getString(R.string.SirotageBetResultSingle)))
 	    	       .setCancelable(false)
-	    	       .setPositiveButton(getString(R.string.OkLbl), new DialogInterface.OnClickListener() {
+	    	       .setPositiveButton(getString(R.string.ValiderLbl), new DialogInterface.OnClickListener() {
 	    	           public void onClick(DialogInterface dialog, int id) {
 	    	        	   sirotagePlayerResult(curPlayer, combo, sirotage);
 	    	           }
@@ -583,7 +618,7 @@ public class CDCGame extends ListActivity {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
     	builder.setMessage(msg)
     	       .setCancelable(false)
-    	       .setPositiveButton(getString(R.string.OkLbl), new DialogInterface.OnClickListener() {
+    	       .setPositiveButton(getString(R.string.ValiderLbl), new DialogInterface.OnClickListener() {
     	           public void onClick(DialogInterface dialog, int id) {
     	        	   nextPlayer();
     	           }
@@ -720,7 +755,7 @@ public class CDCGame extends ListActivity {
 		//Liste des joueurs avec grelottine
 		ArrayList<CDCPlayer> player_with_grelottine = listPlayerWithGrelottine();
 
-		// Si aucun joeur n'a de grelottine ou que seul le joeur en cours a une grelottine on n'affiche pas de message "Quelqu'un a dit Grelottine?"
+		// Si aucun joueur n'a de grelottine ou que seul le joeur en cours a une grelottine on n'affiche pas de message "Quelqu'un a dit Grelottine?"
 		if (player_with_grelottine.isEmpty())
 		{
 			if (!m_listPlayers.get(m_curPlayerIndex).hasGrelottine())
@@ -777,13 +812,31 @@ public class CDCGame extends ListActivity {
 				})
 				.setPositiveButton(getString(R.string.YesLbl), new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
-						//Si un joeur défis
+						//Si un joueur défis
 						selectOnePlayerGrelottine(list_player_grelottine);
-						//TODO Faire la gestion du pariage grelottine (utiliser les fonctions déjà présente)
+						dialog.dismiss();
 					}
 				});
 		AlertDialog alert = builder.create();
 		alert.show();
+	}
+
+	/**
+	 * Retourne le nombre de joueurs qui peuvent faire une grelotine sur le joueur en cours.
+	 * (On exclut donc le joueur en cours)
+	 * @return
+	 */
+	private int getNbJoueurPossibleGrelottin(ArrayList<CDCPlayer> list_player_grelottine)
+	{
+		int nb_jours_possible = 0;
+		for (int i = 0; i < list_player_grelottine.size(); ++i) {
+			if ( m_listPlayers.get(m_curPlayerIndex) != list_player_grelottine.get(i))
+			{
+				if(list_player_grelottine.get(i).getName() != null)
+					nb_jours_possible++;
+			}
+		}
+		return nb_jours_possible;
 	}
 
 	/**
@@ -792,10 +845,16 @@ public class CDCGame extends ListActivity {
 	 */
 	public void selectOnePlayerGrelottine(ArrayList<CDCPlayer> list_player_grelottine)
 	{
-		final String[] items = new String[list_player_grelottine.size()];
+        //TODO Faire un truc plus propre...
+		final String[] items = new String[getNbJoueurPossibleGrelottin(list_player_grelottine)];
+		int j = 0;
 		for (int i = 0; i < list_player_grelottine.size(); ++i) {
 			if ( m_listPlayers.get(m_curPlayerIndex) != list_player_grelottine.get(i))
-				items[i] = list_player_grelottine.get(i).getName();
+			{
+				if(list_player_grelottine.get(i).getName() != null)
+					items[j] = list_player_grelottine.get(i).getName();
+					j++;
+			}
 		}
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle(R.string.GrelottineQuestionDefieQui);
@@ -898,15 +957,26 @@ public class CDCGame extends ListActivity {
 	    		msg = pl.getName() + " " + getString(R.string.PointsWinLbl) + " " + comboRealised + " !";
 	    		break;
 			case NEANT:
-				//Aucun joueur n'a dit grelottine
-				//Si le joueur a déjà une grelottine
-				if (pl.hasGrelottine())
-					msg = pl.getName() + " " + getString(R.string.PointsKeepLbl) + " " + comboRealised + " !";
+				//Si la grelotine fait partie des règles
+				if(CulDeChouette.GRELOTTINE)
+				{
+					//Aucun joueur n'a dit grelottine
+					//Si le joueur a déjà une grelottine
+					if (pl.hasGrelottine())
+						msg = pl.getName() + " " + getString(R.string.PointsKeepLbl) + " " + comboRealised + " !";
+					else
+					{
+						m_listPlayers.get(m_curPlayerIndex).setGrelottine(true);
+						msg = pl.getName() + " " + getString(R.string.PointsWinLbl) + " " + comboRealised + " !";
+					}
+				}
 				else
 				{
-					m_listPlayers.get(m_curPlayerIndex).setGrelottine(true);
-					msg = pl.getName() + " " + getString(R.string.PointsWinLbl) + " " + comboRealised + " !";
+					msg = pl.getName() + " " + getString(R.string.PointsWinLbl) + " " + points + " "
+							+ getString(R.string.PointsLbl) + " " + getString(R.string.PointsWith) + " " + getString(R.string.Neant) + " !";
 				}
+
+
 				break;
     	}
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -915,7 +985,7 @@ public class CDCGame extends ListActivity {
 		{
 			builder.setMessage(msg)
 					.setCancelable(false)
-					.setPositiveButton(getString(R.string.OkLbl), new DialogInterface.OnClickListener() {
+					.setPositiveButton(getString(R.string.ValiderLbl), new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int id) {
 							nextPlayer();
 						}
@@ -924,7 +994,13 @@ public class CDCGame extends ListActivity {
 		}
 		else
 		{
-			builder.setMessage(msg);
+			builder.setMessage(msg)
+			.setCancelable(false)
+			.setPositiveButton(getString(R.string.OkLbl), new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int id) {
+					//Hello
+				}
+			});;
 			alert = builder.create();
 			//MAJ desrésultat
 			m_adapter.notifyDataSetChanged();
@@ -970,7 +1046,8 @@ public class CDCGame extends ListActivity {
     	
 		CDCPlayer curPlayer = m_listPlayers.get(m_curPlayerIndex);
 		m_titleTV.setText(curPlayer.getName() + " " + getString(R.string.curPlayer));
-		
+		//RAZ les dées
+		clearDices();
 		grelottin.setGrelottine(false);
 		curPlayer.setGrelottin(grelottin_ind);
 		
@@ -997,7 +1074,7 @@ public class CDCGame extends ListActivity {
 		
 		alert.setTitle(curPlayer.getName() + " " + getString(R.string.GrelottinePointsQuestion));
 
-		alert.setPositiveButton(getString(R.string.OkLbl), new DialogInterface.OnClickListener() {
+		alert.setPositiveButton(getString(R.string.ValiderLbl), new DialogInterface.OnClickListener() {
 		public void onClick(DialogInterface dialog, int whichButton) {
 			try {
 			  int value = Integer.parseInt(input.getText().toString());
@@ -1042,7 +1119,7 @@ public class CDCGame extends ListActivity {
 		
 		alert.setTitle(curPlayer.getName() + " " + getString(R.string.CivetPlayQuestion));
 
-		alert.setPositiveButton(getString(R.string.OkLbl), new DialogInterface.OnClickListener() {
+		alert.setPositiveButton(getString(R.string.ValiderLbl), new DialogInterface.OnClickListener() {
 		public void onClick(DialogInterface dialog, int whichButton) {
 			try {
 			  int value = Integer.parseInt(input.getText().toString());
@@ -1125,7 +1202,7 @@ public class CDCGame extends ListActivity {
 		return nb;
 	}
 
-    /*
+    /**
     	Permet de générer un nombre aléatoire pour simuler le lancé des dés
      */
 	public void RandomDice(View v) {
@@ -1324,9 +1401,6 @@ public class CDCGame extends ListActivity {
 		rb.setEnabled(true);
 	}
 
-	/*
-	Permet de désactiver les dés virutels une fois lancé ou non utilisé
-	 */
 	public void disableVirtualDice(View v){
 		Button bt = (Button) findViewById(R.id.randomDiceBtn);
 		bt.setEnabled(false);

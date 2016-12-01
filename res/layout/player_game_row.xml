@@ -1,60 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="fill_parent"
-  android:layout_height="wrap_content"
-  android:paddingTop="2dip"
-  android:paddingLeft="10dip"
-  android:paddingBottom="2dip">
+<LinearLayout
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:paddingTop="2dip"
+		android:paddingLeft="10dip"
+		android:paddingBottom="2dip"
+		android:orientation="horizontal">
   
-  <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/playerGameRowName"
-    android:layout_width="wrap_content"
-    android:layout_height="fill_parent"
-  	android:gravity="center_vertical|center_horizontal"
-    android:textStyle="bold"
-    android:textColor="#ffffff"
-    android:textSize="20dp" >
-  </TextView>
-  
-  <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-  	android:id="@+id/playerGamePoints"
-  	android:layout_alignParentRight="true"
-  	android:layout_alignTop="@id/playerGameRowName"
-  	android:layout_height="fill_parent"
-  	android:layout_width="90dp"
-  	android:gravity="center_vertical|center_horizontal"
-    android:textColor="#ffffff"
-  	android:textSize="18dp"
-  	android:paddingLeft="1dp">
-  </TextView>
-  
-  <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-  	android:id="@+id/playerGameCivet"
-  	android:layout_toLeftOf="@id/playerGamePoints"
-  	android:layout_alignTop="@id/playerGameRowName"
-  	android:layout_height="fill_parent"
-  	android:layout_width="22dp"
-  	android:text="C"
-  	android:gravity="center_vertical|center_horizontal"
-  	android:textStyle="bold"
-    android:textColor="#ffffff"
-  	android:textSize="18dp"
-  	android:paddingLeft="1dp" >
-  </TextView>
+	<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+					android:id="@+id/playerGameRowName"
+					android:layout_width="90dp"
+					android:layout_height="fill_parent"
+					android:gravity="left|center_horizontal"
+					android:textStyle="bold"
+					android:textColor="#ffffff"
+					android:textSize="20sp" >
+	</TextView>
 
-  <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-  	android:id="@+id/playerGameGrelotine"
-  	android:layout_toLeftOf="@id/playerGameCivet"
-  	android:layout_alignTop="@id/playerGameCivet"
-  	android:layout_height="fill_parent"
-  	android:layout_width="22dp"
-  	android:gravity="center_vertical|center_horizontal"
-  	android:text="G"
-  	android:textStyle="bold"
-    android:textColor="#ffffff"
-  	android:textSize="18dp"
-  	android:paddingLeft="1dp" >
-  </TextView>
+
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		  android:id="@+id/gameStatusBar"
+		  android:layout_width="wrap_content"
+		  android:layout_height="wrap_content"
+		  android:paddingLeft="20dp"
+		  android:paddingRight="0dp"
+		  android:orientation="horizontal" >
+
+		<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+				  android:id="@+id/playerGameBoucliette"
+				  android:layout_height="wrap_content"
+				  android:layout_width="wrap_content"
+				  android:gravity="center_vertical|center_horizontal"
+				  android:drawablePadding="5dp"
+				  android:paddingLeft="1dp"
+				  android:textSize="12sp">
+		</TextView>
+
+		<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+				  android:id="@+id/playerGameCivet"
+				  android:layout_height="fill_parent"
+				  android:layout_width="70dp"
+				  android:text="C"
+				  android:gravity="center_vertical|center_horizontal"
+				  android:textStyle="bold"
+				  android:textColor="#ffffff"
+				  android:textSize="18sp"
+				  android:paddingLeft="1dp" >
+		</TextView>
+
+	<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+		android:id="@+id/playerGameGrelotine"
+		android:layout_height="fill_parent"
+		android:layout_width="22dp"
+		android:gravity="center_vertical|center_horizontal"
+		android:text="G"
+		android:textStyle="bold"
+		android:textColor="#ffffff"
+		android:textSize="18sp"
+		android:paddingLeft="1dp" >
+	</TextView>
+
+
+
+	</LinearLayout>
+
+	<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+		android:id="@+id/playerGamePoints"
+		android:layout_height="wrap_content"
+		android:layout_width="fill_parent"
+		android:gravity="right|center_horizontal"
+		android:textColor="#ffffff"
+		android:textSize="18sp"
+		android:paddingLeft="1dp"
+		android:paddingRight="10dip">
+</TextView>
   
-</RelativeLayout>
+</LinearLayout>
